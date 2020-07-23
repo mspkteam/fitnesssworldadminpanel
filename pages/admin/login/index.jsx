@@ -6,10 +6,10 @@ import {
   Container, Row, Col, Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import Router from 'next/router';
-import '../../../theme.scss';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import '../../../theme.scss';
 
 const Error = styled.span`
     color: red;
@@ -83,7 +83,7 @@ const Login = () => (
                     meta,
                   }) => (
                     <div>
-                      <Input type="password" placeholder="Email" {...field} />
+                      <Input type="password" placeholder="Password" {...field} />
                       {meta.touched && meta.error && (
                       <div className="error">
                         <Error>

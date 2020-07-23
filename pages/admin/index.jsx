@@ -1,16 +1,20 @@
 import React from 'react';
 import { Alert } from 'reactstrap';
 import '../../theme.scss';
+import Router from 'next/router';
 
-const Admin = () => (
-  <div className="bg-dark">
-    <h1>
-      ADMIN HERE
-    </h1>
-    <Alert color="primary">
-      This is a primary alert — check it out!
-    </Alert>
+const Admin = () => {
+  const onClick = () => {
+    Router.push('/admin/login');
+  };
+  return (
+    <div className="bg-dark">
 
-  </div>
-);
+      <Alert color="primary">
+        ADMIN HERE
+      </Alert>
+
+    </div>
+  );
+};
 export default Admin;

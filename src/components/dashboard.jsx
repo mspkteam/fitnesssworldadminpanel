@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
@@ -42,9 +42,6 @@ import TranslateIcon from '@material-ui/icons/Translate';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import RoomIcon from '@material-ui/icons/Room';
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
-import EventIcon from '@material-ui/icons/Event';
-import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import Router from 'next/router';
 
 const drawerWidth = 250;
@@ -62,17 +59,17 @@ const drawerMenu = [
   },
   {
     title: 'Challenges',
-    icon: <FitnessCenterIcon />,
+    icon: <PersonIcon />,
     path: '/admin/dashboard/challenges',
   },
   {
     title: 'Subscribe User',
-    icon: <SubscriptionsIcon />,
+    icon: <StarHalfIcon />,
     path: '/admin/dashboard/subscribe-user',
   },
   {
     title: 'Events',
-    icon: <EventIcon />,
+    icon: <TranslateIcon />,
     path: '/admin/dashboard/events',
   },
   {
