@@ -100,10 +100,9 @@ const AddAdmin = () => {
                         required
                         fullWidth
                         id="username"
-                        label="username"
+                        label="Username"
                         name="username"
                         autoComplete="username"
-                        autoFocus
                         helperText={meta.error}
                         FormHelperTextProps={{ classes: helperTestClasses }}
                         {...field}
@@ -126,7 +125,6 @@ const AddAdmin = () => {
                         label="Email Address"
                         name="email"
                         autoComplete="email"
-                        autoFocus
                         helperText={meta.error}
                         FormHelperTextProps={{ classes: helperTestClasses }}
                         {...field}
@@ -186,7 +184,7 @@ const AddAdmin = () => {
                   color="primary"
                   size="large"
                 >
-                  ADD
+                  Add Admin
                 </Button>
               </form>
             )}

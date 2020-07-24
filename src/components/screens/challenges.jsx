@@ -15,16 +15,127 @@ import Router from 'next/router';
 import Dashboard from '../dashboard';
 
 export const AddChallengeSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3, 'Username is too short')
-    .required('username is required'),
+  challengeName: Yup.string()
+    .min(4, 'challenge name is too short !')
+    .required('name of the challenge is required'),
+  challenge: Yup.string()
+    .min(4, 'challenge is too short !')
+    .required('challenge is required'),
 });
 
-const Challenges = () => (
-  <Dashboard>
-    <h1>
-      Challenges
-    </h1>
-  </Dashboard>
-);
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    margin: 4,
+    color: 'red',
+  },
+  error: {
+    '&.MuiFormHelperText-root.Mui-error': {
+      color: theme.palette.common.white,
+    },
+  },
+}));
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    height: '100px',
+    width: '100px',
+  },
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+}));
+
+const Challenges = () => {
+  const classes = useStyles();
+  const helperTestClasses = helperTextStyles();
+  return (
+
+    <Dashboard>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar} alt="Remy Sharp" src="/icon.jpg" />
+          <Typography component="h1" variant="h5">
+            Add New Challenge
+          </Typography>
+          <Formik
+            initialValues={{
+              challengeName: '', challenge: '',
+            }}
+            validationSchema={AddChallengeSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              console.log('values ', values);
+              Router.push('/admin/dashboard/home');
+            }}
+          >
+            {(formik) => (
+              <form className={classes.form} onSubmit={formik.handleSubmit}>
+                <Field name="challengeName">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="challengeName"
+                        label="Challenge Name"
+                        name="challengeName"
+                        autoComplete="challengeName"
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+                <Field name="challenge">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        id="challenge"
+                        label="What is the Challenge?"
+                        name="challenge"
+                        autoComplete="challenge"
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  Add Challenge
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </div>
+      </Container>
+    </Dashboard>
+  );
+};
 export default Challenges;
