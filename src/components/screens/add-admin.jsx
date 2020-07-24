@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,7 +9,29 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
+import Router from 'next/router';
 import Dashboard from '../dashboard';
+
+export const AddAdminSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(3, 'Username is too short')
+    .required('username is required'),
+  email: Yup.string()
+    .email('Please Enter a valid Email Address')
+    .required('email is required'),
+  password: Yup.string()
+    .min(6, 'password is too short')
+    .required('passsword is required'),
+  confirmPassword: Yup.string().when('password', {
+    is: (val) => (!!(val && val.length > 0)),
+    then: Yup.string().oneOf(
+      [Yup.ref('password')],
+      'Both passwords need to be the same',
+    ),
+  }),
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,9 +51,21 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
 }));
-
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    margin: 4,
+    color: 'red',
+  },
+  error: {
+    '&.MuiFormHelperText-root.Mui-error': {
+      color: theme.palette.common.white,
+    },
+  },
+}));
 const AddAdmin = () => {
   const classes = useStyles();
+  const helperTestClasses = helperTextStyles();
+
   return (
     <Dashboard>
       <Container component="main" maxWidth="xs">
@@ -41,65 +76,124 @@ const AddAdmin = () => {
           <Typography component="h1" variant="h5">
             Add New Admin
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Confirm Password"
-              type="password"
-              id="password"
-              autoComplete="password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              ADD
-            </Button>
-          </form>
+          <Formik
+            initialValues={{
+              username: '', email: '', password: '', confirmPassword: '',
+            }}
+            validationSchema={AddAdminSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              console.log('values ', values);
+              Router.push('/admin/dashboard/home');
+            }}
+          >
+            {(formik) => (
+              <form className={classes.form} onSubmit={formik.handleSubmit}>
+                <Field name="username">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+                <Field name="email">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+                <Field name="password">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+                <Field name="confirmPassword">
+                  {({
+                    field,
+                    meta,
+                  }) => (
+                    <>
+                      <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        id="password"
+                        autoComplete="password"
+                        helperText={meta.error}
+                        FormHelperTextProps={{ classes: helperTestClasses }}
+                        {...field}
+                      />
+                    </>
+                  )}
+                </Field>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  ADD
+                </Button>
+              </form>
+            )}
+          </Formik>
         </div>
       </Container>
     </Dashboard>
-
   );
 };
 export default AddAdmin;
