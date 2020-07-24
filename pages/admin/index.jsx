@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-import { Alert } from 'reactstrap';
-import '../../theme.scss';
 import Router from 'next/router';
 
 const Admin = () => {
@@ -10,9 +10,9 @@ const Admin = () => {
   return (
     <div className="bg-dark">
 
-      <Alert color="primary">
+      <h1 onClick={onClick}>
         ADMIN HERE
-      </Alert>
+      </h1>
 
     </div>
   );

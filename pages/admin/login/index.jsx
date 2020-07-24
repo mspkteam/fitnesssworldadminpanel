@@ -2,20 +2,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {
-  Container, Row, Col, Button, Form, FormGroup, Label, Input,
-} from 'reactstrap';
-import Router from 'next/router';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
-import '../../../theme.scss';
-
-const Error = styled.span`
-    color: red;
-`;
-const LogoText = styled.h1`
-`;
+import Router from 'next/router';
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,84 +23,127 @@ export const LoginSchema = Yup.object().shape({
     .required('passsword field is required'),
 });
 
-const Login = () => (
-  <Container style={{ minHeight: '100vh' }} className=" d-flex align-items-center justify-content-center">
-    <Row className="w-100">
-      <Col style={{ backgroundColor: '#002b36' }} className="p-5 rounded-lg" md={{ size: 6, offset: 3 }}>
-        <div className="text-center bg-dark">
-          <img
-            style={{
-              height: '100px', width: '100px', position: 'absolute', top: '-14%', left: '41%',
-            }}
-            src="/icon.jpg"
-            alt="logo"
-          />
-        </div>
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      backgroundColor: '#e6e6e6',
+      padding: theme.spacing(10),
+    },
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    height: '100px',
+    width: '100px',
+    marginBottom: theme.spacing(2),
+  },
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  typography: {
+    marginBottom: theme.spacing(3),
+  },
+}));
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    margin: 4,
+    color: 'red',
+  },
+  error: {
+    '&.MuiFormHelperText-root.Mui-error': {
+      color: theme.palette.common.white,
+    },
+  },
+}));
 
-        <LogoText className="text-white text-center">
+const Login = () => {
+  const classes = useStyles();
+  const helperTestClasses = helperTextStyles();
+  return (
+    <Container component="main" maxWidth="sm" className={classes.root}>
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar} alt="Remy Sharp" src="/icon.jpg" />
+        <Typography component="h4" variant="h4">
           FITNESS WORLD
-        </LogoText>
-        <h3 className="text-secondary text-center mb-3">
+        </Typography>
+        <Typography component="h5" variant="h5" className={classes.typography}>
           Admin Login
-        </h3>
+        </Typography>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{
+            email: '', password: '',
+          }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            Router.push('/admin/dashboard');
+            console.log('values ', values);
+            Router.push('/admin/dashboard/home');
           }}
         >
           {(formik) => (
-            <Form onSubmit={formik.handleSubmit}>
-              <FormGroup>
-                <Label className="text-white" for="exampleEmail">Email</Label>
-                <Field name="email">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <div>
-                      <Input type="text" placeholder="Email" {...field} />
-                      {meta.touched && meta.error && (
-                      <div className="error">
-                        <Error>
-                          {meta.error}
-                        </Error>
-                      </div>
-                      )}
-                    </div>
-                  )}
-                </Field>
-              </FormGroup>
-              <FormGroup>
-                <Label className="text-white" for="examplePassword">Password</Label>
-                <Field name="password">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <div>
-                      <Input type="password" placeholder="Password" {...field} />
-                      {meta.touched && meta.error && (
-                      <div className="error">
-                        <Error>
-                          {meta.error}
-                        </Error>
-                      </div>
-                      )}
-                    </div>
-                  )}
-                </Field>
-              </FormGroup>
-              <Button color="secondary" type="submit" disabledl>
-                SUBMIT
-
+            <form className={classes.form} onSubmit={formik.handleSubmit}>
+              <Field name="email">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Field name="password">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                size="large"
+              >
+                Login
               </Button>
-            </Form>
+            </form>
           )}
         </Formik>
-      </Col>
-    </Row>
-  </Container>
-);
+      </div>
+    </Container>
+  );
+};
 export default Login;
+
+// '#002b36'
