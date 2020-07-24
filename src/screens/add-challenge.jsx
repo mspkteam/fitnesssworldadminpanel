@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import Router from 'next/router'
-import Dashboard from '../dashboard'
+import Layout from '../components/common/layout'
 
 export const AddChallengeSchema = Yup.object().shape({
   challengeName: Yup.string()
@@ -54,12 +54,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Challenges = () => {
+const AddChallenge = () => {
   const classes = useStyles()
   const helperTestClasses = helperTextStyles()
   return (
-
-    <Dashboard>
+    <Layout>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -74,7 +73,7 @@ const Challenges = () => {
             validationSchema={AddChallengeSchema}
             onSubmit={(values, { setSubmitting }) => {
               console.log('values ', values)
-              Router.push('/admin/dashboard/home')
+              Router.push('/home')
             }}
           >
             {(formik) => (
@@ -121,7 +120,6 @@ const Challenges = () => {
                     </>
                   )}
                 </Field>
-
                 <Button
                   type="submit"
                   variant="contained"
@@ -135,7 +133,7 @@ const Challenges = () => {
           </Formik>
         </div>
       </Container>
-    </Dashboard>
+    </Layout>
   )
 }
-export default Challenges
+export default AddChallenge

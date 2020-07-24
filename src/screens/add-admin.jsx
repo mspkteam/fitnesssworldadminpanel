@@ -1,18 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import { Formik, Field } from 'formik';
-import * as Yup from 'yup';
-import Router from 'next/router';
-import Dashboard from '../dashboard';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Avatar from '@material-ui/core/Avatar'
+import Typography from '@material-ui/core/Typography'
+import { Formik, Field } from 'formik'
+import * as Yup from 'yup'
+import Router from 'next/router'
+import Layout from '../components/common/layout'
 
 export const AddAdminSchema = Yup.object().shape({
   username: Yup.string()
@@ -31,7 +31,7 @@ export const AddAdminSchema = Yup.object().shape({
       'Both passwords need to be the same',
     ),
   }),
-});
+})
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-}));
+}))
 const helperTextStyles = makeStyles((theme) => ({
   root: {
     margin: 4,
@@ -61,13 +61,13 @@ const helperTextStyles = makeStyles((theme) => ({
       color: theme.palette.common.white,
     },
   },
-}));
+}))
 const AddAdmin = () => {
-  const classes = useStyles();
-  const helperTestClasses = helperTextStyles();
+  const classes = useStyles()
+  const helperTestClasses = helperTextStyles()
 
   return (
-    <Dashboard>
+    <Layout>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -82,8 +82,8 @@ const AddAdmin = () => {
             }}
             validationSchema={AddAdminSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log('values ', values);
-              Router.push('/admin/dashboard/home');
+              console.log('values ', values)
+              Router.push('/home')
             }}
           >
             {(formik) => (
@@ -191,7 +191,7 @@ const AddAdmin = () => {
           </Formik>
         </div>
       </Container>
-    </Dashboard>
-  );
-};
-export default AddAdmin;
+    </Layout>
+  )
+}
+export default AddAdmin

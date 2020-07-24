@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { DarkTheme, LightTheme } from '../src/theme';
+import React, { useState } from 'react'
+import Head from 'next/head'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { DarkTheme, LightTheme } from '../src/theme'
 
 export default function Home() {
-  const [state, setState] = useState(false);
+  const [state, setState] = useState(false)
   return (
     <ThemeProvider theme={state.darkMode ? DarkTheme : LightTheme}>
       <div className="container">
@@ -17,7 +18,7 @@ export default function Home() {
         <main>
           <h1 className="title">
             Welcome to
-            <a href="/admin/login"> Fitness World!</a>
+            <a href="/login"> Fitness World!</a>
           </h1>
 
           <p className="description">
@@ -25,7 +26,7 @@ export default function Home() {
           </p>
 
           <div className="grid">
-            <a href="/admin/login" className="card">
+            <a href="/login" className="card">
               <h3>ADMIN &rarr;</h3>
               <p>GOTO LOGIN.</p>
             </a>
@@ -43,7 +44,6 @@ export default function Home() {
             <p> Morosoft</p>
           </a>
         </footer>
-
         <style jsx>
           {`
         .container {
@@ -178,24 +178,7 @@ export default function Home() {
 
         </style>
 
-        <style jsx global>
-          {`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}
-
-        </style>
       </div>
     </ThemeProvider>
-  );
+  )
 }

@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import { Formik, Field } from 'formik';
-import * as Yup from 'yup';
-import Router from 'next/router';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Avatar from '@material-ui/core/Avatar'
+import Typography from '@material-ui/core/Typography'
+import { Formik, Field } from 'formik'
+import * as Yup from 'yup'
+import Router from 'next/router'
 
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,7 +21,7 @@ export const LoginSchema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'password is too short')
     .required('passsword field is required'),
-});
+})
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   typography: {
     marginBottom: theme.spacing(3),
   },
-}));
+}))
 const helperTextStyles = makeStyles((theme) => ({
   root: {
     margin: 4,
@@ -56,17 +56,17 @@ const helperTextStyles = makeStyles((theme) => ({
       color: theme.palette.common.white,
     },
   },
-}));
+}))
 
 const Login = () => {
-  const classes = useStyles();
-  const helperTestClasses = helperTextStyles();
+  const classes = useStyles()
+  const helperTestClasses = helperTextStyles()
   return (
     <Container component="main" maxWidth="sm" className={classes.root}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar} alt="Remy Sharp" src="/icon.jpg" />
-        <Typography component="h4" variant="h4">
+        <Typography variant="h4">
           FITNESS WORLD
         </Typography>
         <Typography component="h5" variant="h5" className={classes.typography}>
@@ -78,8 +78,8 @@ const Login = () => {
           }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            console.log('values ', values);
-            Router.push('/admin/dashboard/home');
+            console.log('values ', values)
+            Router.push('/welcome')
           }}
         >
           {(formik) => (
@@ -141,8 +141,8 @@ const Login = () => {
         </Formik>
       </div>
     </Container>
-  );
-};
-export default Login;
+  )
+}
+export default Login
 
 // '#002b36'

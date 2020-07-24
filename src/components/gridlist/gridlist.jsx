@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import Grid from '@material-ui/core/Grid';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Paper from '@material-ui/core/Paper';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Button from '@material-ui/core/Button';
-import tileData from './tile-data';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import GridList from '@material-ui/core/GridList'
+import Grid from '@material-ui/core/Grid'
+import GridListTile from '@material-ui/core/GridListTile'
+import GridListTileBar from '@material-ui/core/GridListTileBar'
+import IconButton from '@material-ui/core/IconButton'
+import InfoIcon from '@material-ui/icons/Info'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Paper from '@material-ui/core/Paper'
+import ListSubheader from '@material-ui/core/ListSubheader'
+import Button from '@material-ui/core/Button'
+import tileData from './tile-data'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   gridList: {
     // display: 'flex',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
+    // transform: 'translateZ(0)',
   },
   titleBar: {
     background:
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}))
 
 /**
  * The example data is structured as follows:
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
  * ];
  */
 export default function AdvancedGridList() {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -97,5 +97,5 @@ export default function AdvancedGridList() {
         UPLOAD VIDEO
       </Button>
     </div>
-  );
+  )
 }

@@ -1,14 +1,13 @@
-import React from 'react';
-import Dashboard from '../dashboard';
-import Gridlist from '../gridlist/gridlist';
+import React from 'react'
+import Gridlist from '../components/gridlist/gridlist'
+import Layout from '../components/common/layout'
 
 const Home = () => (
-  <Dashboard>
+  <Layout>
     <h1>
       INFORMATIONAL VIDEOS
     </h1>
     <Gridlist />
-
     <h1>
       WORKOUT VIDEOS
     </h1>
@@ -17,6 +16,6 @@ const Home = () => (
       TRAINING VIDEOS
     </h1>
     <Gridlist />
-  </Dashboard>
-);
-export default Home;
+  </Layout>
+)
+export default Home
