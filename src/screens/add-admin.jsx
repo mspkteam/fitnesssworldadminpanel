@@ -67,131 +67,131 @@ const AddAdmin = () => {
   const helperTestClasses = helperTextStyles()
 
   return (
-    <Layout>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar} alt="Remy Sharp" src="/icon.jpg" />
 
-          <Typography component="h1" variant="h5">
-            Add New Admin
-          </Typography>
-          <Formik
-            initialValues={{
-              username: '', email: '', password: '', confirmPassword: '',
-            }}
-            validationSchema={AddAdminSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              console.log('values ', values)
-              Router.push('/home')
-            }}
-          >
-            {(formik) => (
-              <form className={classes.form} onSubmit={formik.handleSubmit}>
-                <Field name="username">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
-                        helperText={meta.error}
-                        FormHelperTextProps={{ classes: helperTestClasses }}
-                        {...field}
-                      />
-                    </>
-                  )}
-                </Field>
-                <Field name="email">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        helperText={meta.error}
-                        FormHelperTextProps={{ classes: helperTestClasses }}
-                        {...field}
-                      />
-                    </>
-                  )}
-                </Field>
-                <Field name="password">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        helperText={meta.error}
-                        FormHelperTextProps={{ classes: helperTestClasses }}
-                        {...field}
-                      />
-                    </>
-                  )}
-                </Field>
-                <Field name="confirmPassword">
-                  {({
-                    field,
-                    meta,
-                  }) => (
-                    <>
-                      <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="confirmPassword"
-                        label="Confirm Password"
-                        type="password"
-                        id="password"
-                        autoComplete="password"
-                        helperText={meta.error}
-                        FormHelperTextProps={{ classes: helperTestClasses }}
-                        {...field}
-                      />
-                    </>
-                  )}
-                </Field>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                >
-                  Add Admin
-                </Button>
-              </form>
-            )}
-          </Formik>
-        </div>
-      </Container>
-    </Layout>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar} alt="Remy Sharp" src="/icon.jpg" />
+
+        <Typography component="h1" variant="h5">
+          Add New Admin
+        </Typography>
+        <Formik
+          initialValues={{
+            username: '', email: '', password: '', confirmPassword: '',
+          }}
+          validationSchema={AddAdminSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            console.log('values ', values)
+            Router.push('/home')
+          }}
+        >
+          {(formik) => (
+            <form className={classes.form} onSubmit={formik.handleSubmit}>
+              <Field name="username">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="username"
+                      label="Username"
+                      name="username"
+                      autoComplete="username"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Field name="email">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Field name="password">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Field name="confirmPassword">
+                {({
+                  field,
+                  meta,
+                }) => (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="confirmPassword"
+                      label="Confirm Password"
+                      type="password"
+                      id="password"
+                      autoComplete="password"
+                      helperText={meta.error}
+                      FormHelperTextProps={{ classes: helperTestClasses }}
+                      {...field}
+                    />
+                  </>
+                )}
+              </Field>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                size="large"
+              >
+                Add Admin
+              </Button>
+            </form>
+          )}
+        </Formik>
+      </div>
+    </Container>
+
   )
 }
 export default AddAdmin

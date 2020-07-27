@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
@@ -5,11 +6,12 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { ApolloProvider } from '@apollo/client'
 import { LightTheme, DarkTheme } from '../src/theme'
+import { useApollo } from '../lib/apolloClient'
 
-export default function MyApp(props) {
-  console.log('prxxxxops ', props)
-  const { Component, pageProps } = props
+export default function App({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps.initialApolloState)
   const [state, setState] = useState(false)
 
   React.useEffect(() => {
@@ -29,15 +31,18 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <ThemeProvider theme={state.darkMode ? DarkTheme : LightTheme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ApolloProvider client={apolloClient}>
+
+        <ThemeProvider theme={!state ? DarkTheme : LightTheme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   )
 }
 
-MyApp.propTypes = {
+App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 }

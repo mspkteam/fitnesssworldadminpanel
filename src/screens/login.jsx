@@ -59,6 +59,7 @@ const helperTextStyles = makeStyles((theme) => ({
 }))
 
 const Login = () => {
+  console.log('LOGIN IN SCREEN')
   const classes = useStyles()
   const helperTestClasses = helperTextStyles()
   return (
